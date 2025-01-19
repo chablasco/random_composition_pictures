@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,18 +24,12 @@
     let numberOfImages = 5; // Number of images to display at once
     let recentImages = [];
     let images = []; // Array to hold preloaded images
-    const totalImages = 158; // Total number of images you have in the assets folder
+    const totalImages = 158; // Total number of images in the "assets" folder
 
     function preload() {
-      // Preload all images into the array (Simulating placeholders for now)
+      // Load all images from the "assets" folder
       for (let i = 0; i < totalImages; i++) {
-        let img = createImage(100, 100); // Placeholder image
-        img.loadPixels();
-        for (let j = 0; j < img.pixels.length; j++) {
-          img.pixels[j] = random(255); // Random pixel colors
-        }
-        img.updatePixels();
-        images.push(img); // Add to the images array
+        images.push(loadImage(`assets/${i}.jpeg`)); // Adjust path if your folder structure differs
       }
     }
 

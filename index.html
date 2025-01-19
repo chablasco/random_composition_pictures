@@ -24,18 +24,21 @@
     let numberOfImages = 5; // Number of images to display at once
     let recentImages = [];
     let images = []; // Array to hold preloaded images
-    const totalImages = 158; // Total number of images in the "asset" folder
+    const totalImages = 158; // Total number of images in the "assets" folder
+    let displayInterval = 2; // Seconds between compositions
 
     function preload() {
       // Load all images from the "assets" folder
       for (let i = 0; i < totalImages; i++) {
-        images.push(loadImage(`asset/${i}.jpeg`)); // Adjust path if your folder structure differs
+        images.push(loadImage(`assets/${i}.jpeg`)); // Adjust path if your folder structure differs
       }
     }
 
     function setup() {
       createCanvas(windowWidth, windowHeight);
       strokeCap(SQUARE);
+      frameRate(1 / displayInterval); // Set frame rate (1 frame every `displayInterval` seconds)
+
       for (let i = 0; i < numberOfImages; i++) {
         recentImages.push(-1); // Initialize recent images with -1
       }

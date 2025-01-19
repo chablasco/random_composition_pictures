@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Random Compositions Pictures</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
+  <style>
+    body {
+      margin: 0;           /* Remove default margin */
+      overflow: hidden;    /* Prevent scrollbars */
+    }
+    canvas {
+      display: block;      /* Remove extra spacing below canvas */
+    }
+  </style>
+</head>
+<body>
+  <script>
+    let bg = '#f1f1f1';
+    let fg = '#000000';
+    let accent = '#0000ff';
+
+    let padding = 100;
+    let numberOfImages = 5; // Number of images to display at once
+    let recentImages = [];
+    let images = []; // Array to hold preloaded images
+    const totalImages = 158; // Total number of images you have in the assets folder
+
+    function preload() {
+      // Preload all images into the array (Simulating placeholders for now)
+      for (let i = 0; i < totalImages; i++) {
+        let img = createImage(100, 100); // Placeholder image
+        img.loadPixels();
+        for (let j = 0; j < img.pixels.length; j++) {
+          img.pixels[j] = random(255); // Random pixel colors
+        }
+        img.updatePixels();
+        images.push(img); // Add to the images array
+      }
+    }
+
+    function setup() {
+      createCanvas(windowWidth, windowHeight);
+      strokeCap(SQUARE);
+      for (let i = 0; i < numberOfImages; i++) {
+        recentImages.push(-1); // Initialize recent images with -1
+      }
+    }
+
+    function draw() {
+      background(bg);
+
+      for (let i = 0; i < numberOfImages; i++) {
+        let imgSelector;
+        do {
+          imgSelector = int(random(totalImages)); // Select a random image index
+        } while (recentImages.includes(imgSelector)); // Avoid recent images
+
+        recentImages[i] = imgSelector; // Update recent images list
+
+        let img = images[imgSelector];
+        let imageSize = int(random(400, 500)); // Random image size
+        img.resize(imageSize, 0); // Resize the image
+
+        // Display the image
+        imageMode(CENTER);
+        push();
+        translate(random(padding, width - padding), random(padding, height - padding));
+        image(img, 0, 0);
+        pop();
+      }
+    }
+
+    function windowResized() {
+      resizeCanvas(windowWidth, windowHeight);
+    }
+  </script>
+</body>
+</html>

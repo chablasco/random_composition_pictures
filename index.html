@@ -24,13 +24,13 @@
     let numberOfImages = 5; // Number of images to display at once
     let recentImages = [];
     let images = []; // Array to hold preloaded images
-    const totalImages = 158; // Total number of images in the "assets" folder
+    const totalImages = 158; // Total number of images in the "asset" folder
     let displayInterval = 2; // Seconds between compositions
 
     function preload() {
       // Load all images from the "assets" folder
       for (let i = 0; i < totalImages; i++) {
-        images.push(loadImage(`assets/${i}.jpeg`)); // Adjust path if your folder structure differs
+        images.push(loadImage(`asset/${i}.jpeg`)); // Adjust path if your folder structure differs
       }
     }
 
